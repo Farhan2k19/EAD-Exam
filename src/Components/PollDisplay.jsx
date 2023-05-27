@@ -1,5 +1,7 @@
 import React from 'react';
 import UserParticipation from './UserParticipation';
+import { useState } from 'react';
+import AnotherUserParticipation from './AnotherUserParticipation';
 function PollDisplay({}) {
   const question = "What is your favorite programming language?";
   const choicesArray = [
@@ -9,6 +11,11 @@ function PollDisplay({}) {
     { "id": 4, "label": "C#", "votes": 0 }
   ];
 
+  const [selectedChoice, setSelectedChoice] = useState(null);
+
+  const handleChoiceSelect = (choiceId) => {
+    setSelectedChoice(choiceId);
+  };
   return (
     <div>
       <h2>{question}</h2>
@@ -23,6 +30,7 @@ function PollDisplay({}) {
      
     
       <UserParticipation choicesArray={choicesArray} />
+      <AnotherUserParticipation choicesArray={choicesArray} setSelectedChoice/>
 
     </div>
   );
