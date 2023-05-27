@@ -44,4 +44,5 @@ const AnotherUserParticipation = ({ choicesArray, onResetSelectedChoice }) => {
   );
 };
 
+
 export default AnotherUserParticipation;

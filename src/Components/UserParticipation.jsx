@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import PollDisplay from './PollDisplay';
 
 const UserParticipation = ({ choicesArray }) => {
   const [selectedChoice, setSelectedChoice] = useState(null);
+  const [hasVoted, setHasVoted] = useState(false);
 
   const handleChoiceSelect = (choiceId) => {
     setSelectedChoice(choiceId);
@@ -10,14 +10,7 @@ const UserParticipation = ({ choicesArray }) => {
 
   const handleVoteSubmit = () => {
     if (selectedChoice !== null) {
-      const updatedChoices = choicesArray.map((choice) => {
-        if (choice.id === selectedChoice) {
-          return { ...choice, votes: choice.votes + 1 };
-        }
-        return choice;
-      });
-
-      console.log('Updated choices:', updatedChoices);
+      setHasVoted(true);
     }
   };
 
@@ -42,6 +35,16 @@ const UserParticipation = ({ choicesArray }) => {
         ))}
       </ul>
       <button onClick={handleVoteSubmit}>Submit Vote</button>
+
+      {hasVoted && <ThankYouComponent />}
+    </div>
+  );
+};
+
+const ThankYouComponent = () => {
+  return (
+    <div>
+      <h2>Thank You for Voting!</h2>
     </div>
   );
 };
