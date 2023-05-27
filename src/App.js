@@ -1,6 +1,7 @@
 import './App.css';
 import PollDisplay from './Components/PollDisplay';
 import UserParticipation from './Components/UserParticipation';
+import Timer from './Components/Timer';
 function App() {
 
 
@@ -13,16 +14,21 @@ function App() {
       { text: "JavaScript", count: 0 },
     ],
   };
-  
+
   return (
 
     <>
     <div className="App">
       <h1>
-        Polling App 
+
+       Task 1: Polling App 
       </h1>
     </div>
     <PollDisplay  />
+    <h2>
+      Task 2
+    </h2>
+    <Timer/>
    
 
     
