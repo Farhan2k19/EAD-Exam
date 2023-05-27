@@ -1,71 +1,348 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Farhan 
 
-## Available Scripts
+023-19-0101
 
-In the project directory, you can run:
+BSCS 8 Section:B
 
-### `npm start`
+<h1>TASK 01
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h1>Poll Display Component Code
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+importUserParticipationfrom'./UserParticipation';
 
-### `npm test`
+import { useState } from'react';
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+importAnotherUserParticipationfrom'./AnotherUserParticipation';
 
-### `npm run build`
+functionPollDisplay({}) {
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+constquestion = "What is your favorite programming language?";
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+constchoicesArray = [
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    { "id":1, "label":"JavaScript", "votes":0 },
 
-### `npm run eject`
+    { "id":2, "label":"Python", "votes":0 },
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    { "id":3, "label":"Java", "votes":0 },
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    { "id":4, "label":"C#", "votes":0 }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  ];
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+const [selectedChoice, setSelectedChoice] = useState(null);
 
-## Learn More
+consthandleChoiceSelect = (choiceId) => {
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+setSelectedChoice(choiceId);
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  };
 
-### Code Splitting
+return (
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<div>
 
-### Analyzing the Bundle Size
+<h2>{question}</h2>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<ul>
 
-### Making a Progressive Web App
+{choicesArray.map((choice) => (
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<likey={choice.id}>
 
-### Advanced Configuration
+{choice.label}: {choice.votes} Votes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+</li>
 
-### Deployment
+    ))}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+</ul>
 
-### `npm run build` fails to minify
+<UserParticipationchoicesArray={choicesArray}/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# EAD-Exam
+<AnotherUserParticipationchoicesArray={choicesArray}setSelectedChoice/>
+
+  );
+
+}
+
+exportdefaultPollDisplay;
+
+![1685189937252](image/README/1685189937252.png)
+
+<h1>User Participation Component Code
+
+
+constUserParticipation = ({ choicesArray }) => {
+
+const [selectedChoice, setSelectedChoice] = useState(null);
+
+const [hasVoted, setHasVoted] = useState(false);
+
+consthandleChoiceSelect = (choiceId) => {
+
+setSelectedChoice(choiceId);
+
+  };
+
+consthandleVoteSubmit = () => {
+
+if (selectedChoice !== null) {
+
+setHasVoted(true);
+
+    }
+
+  };
+
+return (
+
+<div>
+
+<h2>UserParticipation Component</h2>
+
+<p>Answer Choices:</p>
+
+<ul>
+
+{choicesArray.map((choice) => (
+
+<likey={choice.id}>
+
+<label>
+
+<input
+
+type="radio"
+
+name="choice"
+
+value={choice.id}
+
+checked={selectedChoice === choice.id}
+
+onChange={() =>handleChoiceSelect(choice.id)}
+
+/>
+
+{choice.label} (Selectable)
+
+</label>
+
+</li>
+
+    ))}
+
+</ul>
+
+<buttononClick={handleVoteSubmit}>Submit Vote`</button>`
+
+{hasVoted && `<ThankYouComponent/>`}
+
+</div>
+
+  );
+
+};
+
+constThankYouComponent = () => {
+
+return (
+
+<div>
+
+<h2>Thank You for Voting!</h2>
+
+</div>
+
+  );
+
+};
+
+exportdefaultUserParticipation;
+
+![1685190127639](image/README/1685190127639.png)
+
+
+
+
+<h1>Another User Participation Component
+
+importReact, { useState } from'react';
+
+constAnotherUserParticipation = ({ choicesArray, onResetSelectedChoice }) => {
+
+const [selectedChoice, setSelectedChoice] = useState(null);
+
+consthandleChoiceSelect = (choiceId) => {
+
+setSelectedChoice(choiceId);
+
+  };
+
+consthandleVoteSubmit = () => {
+
+if (selectedChoice !== null) {
+
+console.log('Selected choice:', selectedChoice);
+
+    }
+
+  };
+
+consthandleAnotherUserClick = () => {
+
+setSelectedChoice(null);
+
+onResetSelectedChoice();
+
+  };
+
+return (
+
+<div>
+
+<h2>AnotherUserParticipation Component</h2>
+
+<p>Answer Choices:</p>
+
+<ul>
+
+{choicesArray.map((choice) => (
+
+<likey={choice.id}>
+
+<label>
+
+<input
+
+type="radio"
+
+name="choice"
+
+value={choice.id}
+
+checked={selectedChoice === choice.id}
+
+onChange={() =>handleChoiceSelect(choice.id)}
+
+/>
+
+{choice.label} (Selectable)
+
+</label>
+
+</li>
+
+    ))}
+
+</ul>
+
+<buttononClick={handleVoteSubmit}>Submit Vote`</button>`
+
+<buttononClick={handleAnotherUserClick}>Another User`</button>`
+
+</div>
+
+  );
+
+};
+
+exportdefaultAnotherUserParticipation;
+
+![1685190156021](image/README/1685190156021.png)
+
+<h1>Thankyou Component 
+
+
+importReactfrom'react'
+
+importAnotherUserParticipationfrom'./AnotherUserParticipation'
+
+importUserParticipationfrom'./UserParticipation'
+
+constmsg="Thank you for your vote"
+
+functionThankyouMessage() {
+
+return (
+
+<div>
+
+<UserParticipationmsg/>
+
+<AnotherUserParticipationmsg/>
+
+</div>
+
+  )
+
+}
+
+exportdefaultThankyouMessage
+
+
+
+
+
+
+
+
+<h1> TASK 2
+
+<h1> Timer Component Code
+
+
+
+importReact, { useState, useEffect } from'react';
+
+constTimer = () => {
+
+const [countdown, setCountdown] = useState(10);
+
+useEffect(() => {
+
+consttimer = setInterval(() => {
+
+setCountdown((prevCountdown) =>prevCountdown - 1);
+
+    }, 1000);
+
+if (countdown === 0) {
+
+clearInterval(timer);
+
+    }
+
+return () =>clearInterval(timer);
+
+  }, [countdown]);
+
+return (
+
+<div>
+
+{countdown === 0 ? (
+
+<h2>Time's Up!</h2>
+
+    ) : (
+
+<h2>Countdown: {countdown}</h2>
+
+    )}
+
+div>
+
+  );
+
+};
+
+exportdefaultTimer;
+
+![1685190529335](image/README/1685190529335.png)
+
+on TIME UP:
+
+![1685190726058](image/README/1685190726058.png)
