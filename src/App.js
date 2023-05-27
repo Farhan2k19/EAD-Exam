@@ -1,9 +1,10 @@
 import './App.css';
 import PollDisplay from './Components/PollDisplay';
+import UserParticipation from './Components/UserParticipation';
 function App() {
 
 
-
+  
   return (
 
     <>
@@ -12,7 +13,8 @@ function App() {
         Polling App
       </h1>
     </div>
-    <PollDisplay/>
+    <PollDisplay  />
+    
 
     </>
   );
